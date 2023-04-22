@@ -19,21 +19,55 @@
 .list {
     table-layout: fixed;
     width: 100%;
-    word-wrap: break-word;
-    height: 100px;
+    /* word-wrap: break-word; */
+    height: 80px;
 }
 
-/* @media screen and (max-width: 480px) {
+.list td {
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 480px) {
     .card {
-        padding: 1rem 0;
+        padding: 10px 0;
     }
 
     .list {
         height: auto;
     }
 
-    tbody {
-        display: grid;
-        justify-items: center;
+    .description {
+        display: none;
     }
-} */
+
+    .title {
+        width: 30%;
+        text-align: left;
+    }
+
+    .tableRow{
+        display: flex;
+        align-items: center;
+    }
+
+    .tableRow > td:nth-child(3) {
+        border: 1px solid blue;
+        /* order: 2; */
+    }
+    .tableRow > td:nth-child(4) {
+        border: 1px solid green;
+        /* order: 1; */
+    }
+
+    .tdIcon {
+        width: 5%;
+    }
+}

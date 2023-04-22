@@ -62,11 +62,15 @@ const TaskCard = (props) => {
         <table className="list">
           <tbody>
             <tr>
-              <td>{props.title}</td>
-              <td colSpan="3">{props.description}</td>
-              <td>{status}</td>
-              <td>{transformDate}</td>
+              <td className="title">{props.title}</td>
+              <td className="description" colSpan="2">
+                {props.description}
+              </td>
               <td>
+                <div className="status">{status}</div>
+              </td>
+              <td>{transformDate}</td>
+              <td className='tdIcon'>
                 <img
                   className="icon"
                   src={deleteIcon}

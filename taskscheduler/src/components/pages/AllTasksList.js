@@ -144,7 +144,7 @@ const AllTasksList = (props) => {
             <tbody>
               <tr>
                 <th>Title</th>
-                <th colSpan="3">Description</th>
+                <th colSpan="2">Description</th>
                 <th>Status</th>
                 <th>Due Date</th>
                 <th></th>
