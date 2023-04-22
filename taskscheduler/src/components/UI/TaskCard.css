@@ -2,14 +2,8 @@
     width: 1.5rem;
 }
 
-.status {
-    display: flex;
-    justify-content: center;
-}
-
 .card {
     display: flex;
-    height: 100px;
     margin: 0 2rem;
     align-items: center;
     justify-content: center;
@@ -26,4 +20,20 @@
     table-layout: fixed;
     width: 100%;
     word-wrap: break-word;
+    height: 100px;
 }
+
+/* @media screen and (max-width: 480px) {
+    .card {
+        padding: 1rem 0;
+    }
+
+    .list {
+        height: auto;
+    }
+
+    tbody {
+        display: grid;
+        justify-items: center;
+    }
+} */

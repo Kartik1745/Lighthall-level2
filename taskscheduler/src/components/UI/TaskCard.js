@@ -1,22 +1,22 @@
-import deleteIcon from './icons/delete.svg';
-import * as badge from './Status';
+import deleteIcon from "./icons/delete.svg";
+import * as badge from "./Status";
 
-import './TaskCard.css';
+import "./TaskCard.css";
 
 const TaskCard = (props) => {
   let status;
 
   switch (props.status) {
-    case 'Not Started':
+    case "Not Started":
       status = <badge.NOT_STARTED />;
       break;
-    case 'In Progress':
+    case "In Progress":
       status = <badge.IN_PROGRESS />;
       break;
-    case 'On Hold':
+    case "On Hold":
       status = <badge.ON_HOLD />;
       break;
-    case 'Complete':
+    case "Complete":
       status = <badge.COMPLETE />;
       break;
     default:
@@ -24,18 +24,18 @@ const TaskCard = (props) => {
   }
 
   const dueDate = new Date(props.date);
-  const month = (dueDate.getMonth()) + 1;
-  const day = (dueDate.getDate()) + 1;
+  const month = dueDate.getMonth() + 1;
+  const day = dueDate.getDate() + 1;
   const year = dueDate.getFullYear();
   const transformDate = `${month}/${day}/${year}`;
 
   let monthStr = String(month);
   let dayStr = String(day);
   if (day < 10) {
-    dayStr = "0" + dayStr
-}
+    dayStr = "0" + dayStr;
+  }
   if (month < 10) {
-    monthStr = "0" + monthStr
+    monthStr = "0" + monthStr;
   }
 
   const taskObj = {
@@ -54,23 +54,23 @@ const TaskCard = (props) => {
   const optDelete = (event) => {
     event.stopPropagation();
     props.confirmDelete(props.id);
-  }
+  };
 
   return (
     <>
-      <div className='card' onClick={makeEdits}>
-        <table className='list'>
+      <div className="card" onClick={makeEdits}>
+        <table className="list">
           <tbody>
             <tr>
               <td>{props.title}</td>
-              <td colSpan='3'>{props.description}</td>
-              <td className='status'>{status}</td>
+              <td colSpan="3">{props.description}</td>
+              <td>{status}</td>
               <td>{transformDate}</td>
               <td>
                 <img
-                  className='icon'
+                  className="icon"
                   src={deleteIcon}
-                  alt='trashcan icon to delete'
+                  alt="trashcan icon to delete"
                   onClick={optDelete}
                 ></img>
               </td>

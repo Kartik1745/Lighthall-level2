@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import classes from './AllTasksList.module.css';
-import TaskCard from '../UI/TaskCard';
-import AddTaskModal from '../AddTaskModal';
-import ConfirmDeleteModal from '../ConfirmDeleteModal';
-import EditTaskModal from '../EditTaskModal';
-import * as Sorter from '../SortHelper';
-import Header from '../UI/Header';
+import { useState, useEffect } from "react";
+import classes from "./AllTasksList.module.css";
+import TaskCard from "../UI/TaskCard";
+import AddTaskModal from "../AddTaskModal";
+import ConfirmDeleteModal from "../ConfirmDeleteModal";
+import EditTaskModal from "../EditTaskModal";
+import * as Sorter from "../SortHelper";
+import Header from "../UI/Header";
 
 const AllTasksList = (props) => {
   const [tasks, setTasks] = useState([]);
@@ -14,18 +14,18 @@ const AllTasksList = (props) => {
   const [refresher, setRefresher] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [taskItem, setTaskItem] = useState({});
-  const [taskId, setTaskId] = useState('');
-  const [sortBy, setSortBy] = useState('Date ASC');
+  const [taskId, setTaskId] = useState("");
+  const [sortBy, setSortBy] = useState("Date ASC");
 
   useEffect(() => {
     const getAllTasks = async () => {
       try {
         const response = await fetch(
-          'https://servering.jayraval20.repl.co/signup',
+          "https://servering.jayraval20.repl.co/signup",
           {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
               username: props.user,
@@ -36,7 +36,7 @@ const AllTasksList = (props) => {
         setTasks(data);
       } catch (error) {
         // set error message?
-        console.log('Error!', error);
+        console.log("Error!", error);
       }
     };
 
@@ -75,29 +75,28 @@ const AllTasksList = (props) => {
   };
 
   const refresh = () => {
-    setRefresher(!refresher)
-  }
-
+    setRefresher(!refresher);
+  };
 
   const getSortedTasks = () => {
     let sorted = {};
     switch (sortBy) {
-      case 'Date ASC':
+      case "Date ASC":
         sorted = Sorter.sortDateAsc(tasks);
         break;
-      case 'Date DESC':
+      case "Date DESC":
         sorted = Sorter.sortDateDesc(tasks);
         break;
-      case 'Status ASC':
+      case "Status ASC":
         sorted = Sorter.sortStatusAsc(tasks);
         break;
-      case 'Status DESC':
+      case "Status DESC":
         sorted = Sorter.sortStatusDesc(tasks);
         break;
-      case 'Title ASC':
+      case "Title ASC":
         sorted = Sorter.sortTitleAsc(tasks);
         break;
-      case 'Title DESC':
+      case "Title DESC":
         sorted = Sorter.sortTitleDesc(tasks);
         break;
     }
@@ -106,22 +105,38 @@ const AllTasksList = (props) => {
 
   return (
     <>
-      {showEdit && <EditTaskModal onClick={closeEditTask} taskObj={taskItem} update={refresh}/>}
-      {showDelete && (
-        <ConfirmDeleteModal onClick={closeDeleteTask} taskId={taskId} update={refresh}/>
+      {showEdit && (
+        <EditTaskModal
+          onClick={closeEditTask}
+          taskObj={taskItem}
+          update={refresh}
+        />
       )}
-      {showAddTask && <AddTaskModal onClick={closeAddTask} username={props.user} update={refresh}/>}
-      <Header username={props.user} setUser={props.setUser}/>
-      <div className={classes.page}>
+      {showDelete && (
+        <ConfirmDeleteModal
+          onClick={closeDeleteTask}
+          taskId={taskId}
+          update={refresh}
+        />
+      )}
+      {showAddTask && (
+        <AddTaskModal
+          onClick={closeAddTask}
+          username={props.user}
+          update={refresh}
+        />
+      )}
+      <Header username={props.user} setUser={props.setUser} />
+      <div className={classes.sortDiv}>
         <div className={classes.sort}>
           <label>Sort by</label>
-          <select onChange={selectSort} defaultValue={'Date ASC'}>
-            <option value='Date ASC'>Due Date (ascending)</option>
-            <option value='Date DESC'>Due Date (descending)</option>
-            <option value='Status ASC'>Status (ascending)</option>
-            <option value='Status DESC'>Status (descending)</option>
-            <option value='Title ASC'>Title (ascending)</option>
-            <option value='Title DESC'>Title (descending)</option>
+          <select onChange={selectSort} defaultValue={"Date ASC"}>
+            <option value="Date ASC">Due Date (ascending)</option>
+            <option value="Date DESC">Due Date (descending)</option>
+            <option value="Status ASC">Status (ascending)</option>
+            <option value="Status DESC">Status (descending)</option>
+            <option value="Title ASC">Title (ascending)</option>
+            <option value="Title DESC">Title (descending)</option>
           </select>
         </div>
         <div className={classes.heading}>
@@ -129,7 +144,7 @@ const AllTasksList = (props) => {
             <tbody>
               <tr>
                 <th>Title</th>
-                <th colSpan='3'>Description</th>
+                <th colSpan="3">Description</th>
                 <th>Status</th>
                 <th>Due Date</th>
                 <th></th>
@@ -137,6 +152,8 @@ const AllTasksList = (props) => {
             </tbody>
           </table>
         </div>
+      </div>
+      <div className={classes.page}>
         {getSortedTasks().map((task) => (
           <TaskCard
             key={task._id}
@@ -155,7 +172,7 @@ const AllTasksList = (props) => {
         </p>
       </div>
     </>
-    );
+  );
 };
 
 export default AllTasksList;
