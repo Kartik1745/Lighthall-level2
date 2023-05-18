@@ -1,10 +1,19 @@
 .page {
     display: flex;
-    margin-top: 5rem;
+    padding-top: 13rem;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
     background-color: white;
+    width: 100%;
+}
+
+.sortDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    background-color: white;
+    position: fixed;
+    top: 5rem;
 }
 
 .sort {
@@ -67,4 +76,15 @@
 .addTask:hover {
     cursor: pointer;
     color: #5475CA;
+}
+
+@media screen and (max-width: 480px) {
+    .heading {
+        display: none;
+    }
+
+    .page {
+        padding-top: 10rem;
+
+    }
 }
